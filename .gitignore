@@ -3,6 +3,7 @@
 JetBrains/
 
 !/.gitignore
+!/.editorconfig
 !/README.md
 !nixos/*
 !home-manager/*
