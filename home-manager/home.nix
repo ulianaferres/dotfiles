@@ -11,8 +11,6 @@
   home.stateVersion = "24.11";
 #  home.enableNixpkgsReleaseCheck = false;
 
-#  fonts.fontconfig.enable = pkgs.stdenv.isLinux;
-
   home.packages = with pkgs; [
     zoxide
     fzf
@@ -56,6 +54,7 @@
     btop
     sshfs
     icu
+    discord
     vesktop
     google-chrome
     feishin
@@ -102,31 +101,7 @@
     sbt
     scala-cli
     kotlin
-  ]
-  ++ (
-    if stdenv.isDarwin then
-      [
-        pinentry_mac
-        asitop
-      ]
-    else if stdenv.isLinux then
-      [
-        ethtool
-        obs-studio
-        pinentry-all
-        gamescope
-        makemkv
-        whatsapp-for-linux
-        popsicle
-        powertop
-        nerd-fonts.droid-sans-mono
-        s-tui
-        resilio-sync
-        proton-pass
-      ]
-    else []
-  );
-
+  ];
 
   home.file = {
   };

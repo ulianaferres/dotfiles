@@ -11,6 +11,11 @@
       url = "github:alexstaeding/AlgoTeX/fix/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = {
@@ -18,6 +23,7 @@
     nixpkgs,
     home-manager,
     algotex,
+    plasma-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -54,14 +60,21 @@
         specialArgs = { inherit inputs outputs; };
         modules = [
           ./nixos/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
+          home-manager.nixosModules.home-manager {
             home-manager.users.alex = import ./home-manager/home.nix;
             home-manager.extraSpecialArgs = {
-	      inherit inputs outputs;
+	            inherit inputs outputs;
               pkgs = self.packages."x86_64-linux";
-	    };
-	  }
+	          };
+	        }
+	        home-manager.nixosModules.home-manager {
+            home-manager.users.alex = import ./home-manager/extra-linux.nix;
+            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+            home-manager.extraSpecialArgs = {
+              inherit inputs outputs;
+              pkgs = self.packages."x86_64-linux";
+            };
+          }
         ];
       };
     };
@@ -71,10 +84,10 @@
     homeConfigurations = {
       "alex" = home-manager.lib.homeManagerConfiguration {
         pkgs = self.packages."aarch64-darwin";
-        #pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = { inherit inputs outputs; };
         modules = [
           ./home-manager/home.nix
+          ./home-manager/extra-macos.nix
         ];
       };
     };
