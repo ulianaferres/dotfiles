@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, modulesPath, ... }:
 
 let
@@ -20,9 +16,8 @@ let
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       (import ./hardware-configuration.nix { inherit config lib pkgs modulesPath; })
-#      ./nixos_extra_modules/aes67-daemon.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -41,22 +36,9 @@ in
     };
   };
   environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+
   # Useful other development tools
-
   boot.kernelPackages = latestKernelPackage;
-#  nixpkgs.overlays = [
-#    (final: prev: {
-#      aes67-linux-daemon = final.callPackage ./pkgs/aes67-linux-daemon.nix {
-#        kernel = latestKernelPackage.kernel;
-#      };
-#      aes67-linux-daemon-webui = final.callPackage ./pkgs/aes67-linux-daemon-webui.nix {};
-#    })
-#  ];
-
-#  boot.kernelModules = [ "MergingRavennaALSA" ];
-  boot.extraModulePackages = with pkgs; [
-    #aes67-linux-daemon
-  ];
 
   services.avahi = {
     enable = true;
@@ -73,12 +55,6 @@ in
     prefixLength = 24;
   } ];
 
-#  services.aes67-daemon = {
-#    enable = false;
-#    interface = "enp7s0f0np0";
-#    interface = "enp6s0";
-#  };
-
   environment.systemPackages = with pkgs; [
     wireshark
     helvum
@@ -92,14 +68,6 @@ in
     openrazer-daemon
     polychromatic
   ];
-
-
-#  nixpkgs.config.allowUnfreePredicate = pkg:
-#    builtins.elem (lib.getName pkg) [
-#      "nvidia-x11"
-#      "nvidia-settings"
-#      "nvidia-persistenced"
-#    ];
 
   nix = {
     package = pkgs.nixVersions.latest;
@@ -117,23 +85,14 @@ in
     options nvidia NVreg_TemporaryFilePath=/var/tmp
   '';
 
-
   networking.hostId = "f3eff353";
   networking.hostName = "desktopalex"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -152,30 +111,12 @@ in
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     defaultUserShell = pkgs.zsh;
     users.alex = {
       shell = pkgs.zsh;
       isNormalUser = true;
       extraGroups = [ "wheel" "docker" "openrazer" ];
-  #    packages = with pkgs; [
-  #      tree
-  #    ];
     };
   };
 
@@ -199,60 +140,23 @@ in
     pulseaudio.enable = false;
     pipewire = {
       enable = true;
-      #pulse.enable = true;
       alsa = {
         enable = true;
         support32Bit = true;
       };
-#      wireplumber.configPackages = [
-#        (pkgs.writeTextDir "share/wireplumber/main.lua.d/99-alsa-aes67.lua" ''
-#          alsa_monitor.rules = {
-#            {
-#              matches = {{{ "node.name", "matches", "alsa_output.*mergin_rav*" }}};
-#            },
-#          }
-#        '')
-#      ];
-#      wireplumber.extraConfig."99-aes67-alsa" = {
-#        "node.rules" = [{
-#          matches = [ 
-#            { "node.name" = "alsa_input.*"; }
-#            #{ "device.name" = "alsa_card.aes67"; }
-#          ];
-#          actions = {
-#            update-props = {
-#              "api.alsa.pcm.device" = "AES67 Source";
-#              "node.description" = "AES67 Source";
-#              "media.class" = "Audio/Source";
-#            };
-#          };
-#        }];
-#      };
     };
     xserver = {
-      enable = true;
       xkb.layout = "us";
       videoDrivers = [ "nvidia" ];
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-      };
-      desktopManager.gnome.enable = true;
     };
-#    xserver = {
-#      xkb.layout = "us";
-#      videoDrivers = [ "nvidia" ];
-#    };
-#    desktopManager.plasma6 = {
-#      enable = true;
-#    };
-#    displayManager = {
-#      defaultSession = "plasma";
-#      sddm = {
-#        enable = true;
-#        wayland.enable = true;
-#      };
-#    };
+    desktopManager.plasma6.enable = true;
+    displayManager = {
+      defaultSession = "plasma";
+      sddm = {
+        enable = true;
+	wayland.enable = true;
+      };
+    };
     mullvad-vpn = {
       enable = true;
       package = pkgs.mullvad-vpn;
