@@ -9,6 +9,8 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
+    inkscape
+    gnumake
     cargo
     wl-clipboard
     qbittorrent
