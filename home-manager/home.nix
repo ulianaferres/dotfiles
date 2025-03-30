@@ -2,18 +2,41 @@
 
 {
   home.username = "alex";
-  home.homeDirectory = "/home/alex";
+  home.homeDirectory =
+    if pkgs.stdenv.isLinux then
+      "/home/alex"
+    else
+      "/Users/alex";
+
   home.stateVersion = "24.11";
 #  home.enableNixpkgsReleaseCheck = false;
 
-  fonts.fontconfig.enable = true;
+#  fonts.fontconfig.enable = pkgs.stdenv.isLinux;
 
   home.packages = with pkgs; [
+    zoxide
+    fzf
+    wireshark
+    libyaml
+    ruby
+    coreutils-full
+    git-quick-stats
+    gnumake
     inkscape
     gnumake
     cargo
     wl-clipboard
     qbittorrent
+    tree
+    zstd
+    walk
+    rsync
+    watch
+    tmux
+    bmon
+    nmap
+    ncdu
+
     pciutils
     tmux
     ipmitool
@@ -33,13 +56,9 @@
     btop
     sshfs
     icu
-    popsicle
-    powertop
-    s-tui
     vesktop
     google-chrome
     feishin
-    whatsapp-for-linux
     spotify
     neofetch
     jetbrains.idea-ultimate
@@ -47,9 +66,9 @@
     obsidian
     zotero
     signal-desktop
-    makemkv
     prismlauncher
     git
+    git-annex
     mpv
     ffmpeg
     darktable
@@ -57,31 +76,56 @@
     kotlin
     dafny
     dotnet-sdk
-    #docker
     k9s
     kubectl
     minikube
-    gradle
-    scala
-    scala-cli
-    sbt
     zoom-us
-    resilio-sync
-    #texliveFull
     wget
     cabextract
-    obs-studio
     podman
-    ethtool
     ookla-speedtest
     iperf
     iperf2
-    gamescope
     jellyfin-media-player
-    pinentry-all
-    nerd-fonts.droid-sans-mono
     python311Packages.pygments
-  ];
+
+    # Haskell
+    ghc
+    haskell-language-server
+    haskellPackages.stack
+
+    # JVM
+    gradle
+    scala
+    metals
+    coursier
+    sbt
+    scala-cli
+    kotlin
+  ]
+  ++ (
+    if stdenv.isDarwin then
+      [
+        pinentry_mac
+        asitop
+      ]
+    else if stdenv.isLinux then
+      [
+        ethtool
+        obs-studio
+        pinentry-all
+        gamescope
+        makemkv
+        whatsapp-for-linux
+        popsicle
+        powertop
+        nerd-fonts.droid-sans-mono
+        s-tui
+        resilio-sync
+        proton-pass
+      ]
+    else []
+  );
 
 
   home.file = {
@@ -130,6 +174,10 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-all;
+    pinentryPackage =
+      if pkgs.stdenv.isLinux then
+        pkgs.pinentry-all
+      else
+        pkgs.pinentry_mac;
   };
 }

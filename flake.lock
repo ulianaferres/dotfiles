@@ -8,15 +8,15 @@
         "tuda-logo": "tuda-logo"
       },
       "locked": {
-        "lastModified": 1741012424,
-        "narHash": "sha256-UsGf6JPR6/C9Lxo3OJ721Tsjia8X0MxvFeMaRlnAVwc=",
-        "owner": "w-lfchen",
+        "lastModified": 1743352246,
+        "narHash": "sha256-X77ByMWTNPNxuLkwaoOZlLX4rN7/BQpLYMUfDR6iRAE=",
+        "owner": "alexstaeding",
         "repo": "AlgoTeX",
-        "rev": "a344cc685033b88ca7fe83a10162fc2f76cc6a51",
+        "rev": "b14ec99acb357f4663649671eb04bd1d349a07eb",
         "type": "github"
       },
       "original": {
-        "owner": "w-lfchen",
+        "owner": "alexstaeding",
         "ref": "fix/flake",
         "repo": "AlgoTeX",
         "type": "github"

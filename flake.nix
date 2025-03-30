@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     algotex = {
-      url = "github:w-lfchen/AlgoTeX/fix/flake";
+      url = "github:alexstaeding/AlgoTeX/fix/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
