@@ -69,6 +69,7 @@
             home-manager.users.alex.imports = [
               ./home-manager/home.nix
               ./home-manager/extra-linux.nix
+              ./home-manager/nano-module.nix
             ];
             home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
             home-manager.extraSpecialArgs = {
@@ -89,8 +90,8 @@
           home-manager.darwinModules.home-manager {
             home-manager.users.alex.imports = [
               ./home-manager/home.nix
-              ./home-manager/nano-module.nix
               ./home-manager/extra-macos.nix
+              ./home-manager/nano-module.nix
             ];
             home-manager.extraSpecialArgs = {
               inherit inputs outputs;
