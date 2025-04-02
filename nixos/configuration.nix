@@ -115,6 +115,7 @@ in
     defaultUserShell = pkgs.zsh;
     users.alex = {
       shell = pkgs.zsh;
+      home = "/home/alex";
       isNormalUser = true;
       extraGroups = [ "wheel" "docker" "openrazer" ];
     };
@@ -124,7 +125,7 @@ in
     sway.enable = true;
     steam.enable = true;
     zsh.enable = true;
-  };  
+  };
 
   security.rtkit.enable = true;
   services = {
@@ -154,7 +155,7 @@ in
       defaultSession = "plasma";
       sddm = {
         enable = true;
-	wayland.enable = true;
+        wayland.enable = true;
       };
     };
     mullvad-vpn = {
@@ -226,4 +227,3 @@ in
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.11"; # Did you read the comment?
 }
-

@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +25,7 @@
   outputs = {
     self,
     nixpkgs,
+    nix-darwin,
     home-manager,
     algotex,
     plasma-manager,
@@ -61,14 +66,10 @@
         modules = [
           ./nixos/configuration.nix
           home-manager.nixosModules.home-manager {
-            home-manager.users.alex = import ./home-manager/home.nix;
-            home-manager.extraSpecialArgs = {
-	            inherit inputs outputs;
-              pkgs = self.packages."x86_64-linux";
-	          };
-	        }
-	        home-manager.nixosModules.home-manager {
-            home-manager.users.alex = import ./home-manager/extra-linux.nix;
+            home-manager.users.alex.imports = [
+              ./home-manager/home.nix
+              ./home-manager/extra-linux.nix
+            ];
             home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
             home-manager.extraSpecialArgs = {
               inherit inputs outputs;
@@ -79,15 +80,23 @@
       };
     };
 
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "alex" = home-manager.lib.homeManagerConfiguration {
-        pkgs = self.packages."aarch64-darwin";
-        extraSpecialArgs = { inherit inputs outputs; };
+    darwinConfigurations = {
+      macbookalex = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs outputs self; };
         modules = [
-          ./home-manager/home.nix
-          ./home-manager/extra-macos.nix
+          ./nix-darwin/configuration.nix
+          home-manager.darwinModules.home-manager {
+            home-manager.users.alex.imports = [
+              ./home-manager/home.nix
+              ./home-manager/nano-module.nix
+              ./home-manager/extra-macos.nix
+            ];
+            home-manager.extraSpecialArgs = {
+              inherit inputs outputs;
+              pkgs = self.packages."aarch64-darwin";
+            };
+          }
         ];
       };
     };
