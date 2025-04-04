@@ -10,7 +10,7 @@
 
   boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "nvme" "usbhid" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "sg" "nvidia-uvm" ];
+  boot.kernelModules = [ "kvm-amd" ];
 
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;

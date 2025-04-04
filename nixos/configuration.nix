@@ -64,7 +64,6 @@ in
     podman-tui # status of containers in the terminal
     docker-compose # start group of containers for dev
     #podman-compose # start group of containers for dev
-    nvtopPackages.nvidia
     openrazer-daemon
     polychromatic
   ];
@@ -79,11 +78,6 @@ in
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.extraModprobeConfig = ''
-    options nvidia NVreg_PreserveVideoMemoryAllocations=1
-    options nvidia NVreg_TemporaryFilePath=/var/tmp
-  '';
 
   networking.hostId = "f3eff353";
   networking.hostName = "desktopuliana"; # Define your hostname.
@@ -148,7 +142,7 @@ in
     };
     xserver = {
       xkb.layout = "us";
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "amd" ];
     };
     desktopManager.plasma6.enable = true;
     displayManager = {
@@ -162,12 +156,6 @@ in
       enable = true;
       package = pkgs.mullvad-vpn;
     };
-  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = true;
-    nvidiaSettings = true;
   };
 
   hardware.openrazer = {
