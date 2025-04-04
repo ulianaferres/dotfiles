@@ -38,7 +38,7 @@ in
   environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
   # Useful other development tools
-  boot.kernelPackages = latestKernelPackage;
+  #boot.kernelPackages = latestKernelPackage;
 
   services.avahi = {
     enable = true;
@@ -86,7 +86,7 @@ in
   '';
 
   networking.hostId = "f3eff353";
-  networking.hostName = "desktopalex"; # Define your hostname.
+  networking.hostName = "desktopuliana"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -113,9 +113,9 @@ in
 
   users = {
     defaultUserShell = pkgs.zsh;
-    users.alex = {
+    users.uliana = {
       shell = pkgs.zsh;
-      home = "/home/alex";
+      home = "/home/uliana";
       isNormalUser = true;
       extraGroups = [ "wheel" "docker" "openrazer" ];
     };
@@ -172,7 +172,7 @@ in
 
   hardware.openrazer = {
     enable = true;
-    users = [ "alex" ];
+    users = [ "uliana" ];
   };
 
   # programs.firefox.enable = true;

@@ -16,25 +16,14 @@
   boot.zfs.forceImportRoot = false;
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/f8c3dcd4-2d5c-4e52-b401-8b76a3c64c2f"; # p2
+    device = "/dev/disk/by-uuid/9903111c-60ce-4984-8f9b-578bfd2902dc";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/4B6C-ADB9"; # p1
+    device = "/dev/disk/by-uuid/9329-2F4D";
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
-  };
-
-  fileSystems."/ephemeral" = {
-    device = "/dev/disk/by-uuid/712c2e44-75d2-4c31-8710-a0c956c3075f"; # p3
-    fsType = "ext4";
-  };
-
-  fileSystems."/home/alex" = {
-    device = "desktopalex-pond/home/alex";
-    fsType = "zfs";
-    options = [ "zfsutil" ];
   };
 
   swapDevices = [ ];

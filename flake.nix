@@ -60,13 +60,13 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      desktopalex = nixpkgs.lib.nixosSystem {
+      desktopuliana = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs outputs; };
         modules = [
           ./nixos/configuration.nix
           home-manager.nixosModules.home-manager {
-            home-manager.users.alex.imports = [
+            home-manager.users.uliana.imports = [
               ./home-manager/home.nix
               ./home-manager/extra-linux.nix
               ./home-manager/nano-module.nix
@@ -82,13 +82,13 @@
     };
 
     darwinConfigurations = {
-      macbookalex = nix-darwin.lib.darwinSystem {
+      macbookuliana = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = { inherit inputs outputs self; };
         modules = [
           ./nix-darwin/configuration.nix
           home-manager.darwinModules.home-manager {
-            home-manager.users.alex.imports = [
+            home-manager.users.uliana.imports = [
               ./home-manager/home.nix
               ./home-manager/extra-macos.nix
               ./home-manager/nano-module.nix
