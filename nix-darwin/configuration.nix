@@ -6,9 +6,9 @@
   system.stateVersion = 5;
 
   users = {
-    users.alex = {
+    users.uliana = {
       shell = pkgs.zsh;
-      home = "/Users/alex";
+      home = "/Users/uliana";
     };
   };
 }
