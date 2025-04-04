@@ -50,11 +50,6 @@ in
     };
   };
 
-  networking.interfaces.enp6s0.ipv4.addresses = [ {
-    address = "192.168.0.101";
-    prefixLength = 24;
-  } ];
-
   environment.systemPackages = with pkgs; [
     wireshark
     helvum
