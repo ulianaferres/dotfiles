@@ -144,7 +144,6 @@
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
-    firefox.enable = true;
     zsh = {
       enable = true;
       oh-my-zsh = {

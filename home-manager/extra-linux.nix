@@ -18,6 +18,7 @@
   ];
 
   programs = {
+    firefox.enable = true;
     plasma = {
       enable = true;
 
