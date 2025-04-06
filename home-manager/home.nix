@@ -13,6 +13,7 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    lens
     zoxide
     fzf
     wireshark
@@ -143,7 +144,6 @@
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
-    firefox.enable = true;
     zsh = {
       enable = true;
       oh-my-zsh = {
