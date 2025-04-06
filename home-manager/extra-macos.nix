@@ -6,6 +6,6 @@
     iterm2
     rectangle
     pinentry_mac
-    #asitop
+    asitop
   ];
 }
