@@ -65,7 +65,7 @@
     jetbrains.clion
     obsidian
     zotero
-    signal-desktop
+    signal-desktop-bin
     prismlauncher
     git
     git-annex
