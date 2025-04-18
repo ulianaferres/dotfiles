@@ -70,7 +70,7 @@
     prismlauncher
     git
     git-annex
-    #mpv
+    mpv
     ffmpeg
     darktable
     thunderbird
