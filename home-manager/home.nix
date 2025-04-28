@@ -13,6 +13,9 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    gimp
+    unzip
+    unrar
     p7zip
     lens
     zoxide
