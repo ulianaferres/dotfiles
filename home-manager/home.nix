@@ -254,7 +254,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentryPackage =
+    pinentry.package =
       if pkgs.stdenv.isLinux then
         pkgs.pinentry-all
       else
