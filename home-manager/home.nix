@@ -222,7 +222,7 @@
         {
           plugin = deoplete-lsp;
           config = ''
-            g:deoplete#lsp#handler_enabled = 1
+            " g:deoplete#lsp#handler_enabled = 1
           '';
         }
         {
