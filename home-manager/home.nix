@@ -206,6 +206,7 @@
         })
       '';
       plugins = with pkgs.vimPlugins; [
+        vim-fugitive
         nvim-lspconfig
         nvim-metals
         plenary-nvim
