@@ -16,6 +16,7 @@
     gimp
     unzip
     unrar
+    vimgolf
     p7zip
     lens
     zoxide
