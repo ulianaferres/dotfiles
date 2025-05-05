@@ -208,6 +208,7 @@
       '';
       plugins = with pkgs.vimPlugins; [
         vim-fugitive
+        vim-gitgutter
         nvim-lspconfig
         nvim-metals
         plenary-nvim
