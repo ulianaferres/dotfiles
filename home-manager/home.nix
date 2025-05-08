@@ -49,7 +49,6 @@
     teams-for-linux
     gst_all_1.gstreamer
     yarn
-    nodejs_23
     screen
     killall
     file
