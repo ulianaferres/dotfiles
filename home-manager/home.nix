@@ -63,7 +63,7 @@
     discord
     vesktop
     google-chrome
-    feishin
+    #feishin
     spotify
     neofetch
     jetbrains.idea-ultimate
