@@ -13,7 +13,6 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    mission-center
     insomnia
     gimp
     unzip

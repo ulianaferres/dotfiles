@@ -3,6 +3,7 @@
 {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    mission-center
     ethtool
     obs-studio
     pinentry-all
