@@ -13,6 +13,12 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    insomnia
+    gimp
+    unzip
+    unrar
+    vimgolf
+    p7zip
     lens
     zoxide
     fzf
@@ -43,7 +49,6 @@
     teams-for-linux
     gst_all_1.gstreamer
     yarn
-    nodejs_23
     screen
     killall
     file
@@ -65,11 +70,11 @@
     jetbrains.clion
     obsidian
     zotero
-    signal-desktop
+    signal-desktop-bin
     prismlauncher
     git
     git-annex
-    #mpv
+    mpv
     ffmpeg
     darktable
     thunderbird
@@ -144,6 +149,7 @@
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
+    firefox.enable = true;
     zsh = {
       enable = true;
       oh-my-zsh = {
@@ -160,7 +166,7 @@
           file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         }
       ];
-      initExtra = ''
+      initContent = ''
         source ~/.p10k.zsh
       '';
     };
@@ -201,6 +207,8 @@
         })
       '';
       plugins = with pkgs.vimPlugins; [
+        vim-fugitive
+        vim-gitgutter
         nvim-lspconfig
         nvim-metals
         plenary-nvim
@@ -215,16 +223,12 @@
         {
           plugin = deoplete-lsp;
           config = ''
-            g:deoplete#lsp#handler_enabled = 1
+            " g:deoplete#lsp#handler_enabled = 1
           '';
         }
         {
           plugin = nerdtree;
           config = ''
-            " Start NERDTree and put the cursor back in the other window.
-            autocmd VimEnter * NERDTree | wincmd p
-            " Open the existing NERDTree on each new tab.
-            autocmd BufWinEnter * if &buftype != 'quickfix' && getcmdwintype() == "" | silent NERDTreeMirror | endif
             " Exit Vim if NERDTree is the only window remaining in the only tab.
             autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
             " Close the tab if NERDTree is the only window remaining in it.
@@ -253,7 +257,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentryPackage =
+    pinentry.package =
       if pkgs.stdenv.isLinux then
         pkgs.pinentry-all
       else
