@@ -146,6 +146,11 @@ in
         enable = true;
         support32Bit = true;
       };
+      extraConfig.pipewire.adjust-sample-rate = {
+        "context.properties" = {
+          "default.clock.rate" = 192000;
+        };
+      };
     };
     xserver = {
       xkb.layout = "us";
