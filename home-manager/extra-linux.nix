@@ -3,6 +3,8 @@
 {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    nvidia-container-toolkit
+    ollama-cuda
     mission-center
     ethtool
     obs-studio
