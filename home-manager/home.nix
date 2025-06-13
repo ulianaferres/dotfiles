@@ -14,6 +14,7 @@
 
   home.packages = with pkgs; [
     telegram-desktop
+    glib
     typst
     typstyle
     insomnia
@@ -180,7 +181,11 @@
     vscode = {
       enable = true;
       profiles.default.extensions = with pkgs.vscode-extensions; [
-       # dafny-lang
+        jnoortheen.nix-ide
+        myriad-dreamin.tinymist
+        tomoki1207.pdf
+        vscodevim.vim
+        k--kato.intellij-idea-keybindings
       ];
     };
     nano = {
