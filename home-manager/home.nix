@@ -181,6 +181,7 @@
     vscode = {
       enable = true;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        james-yu.latex-workshop
         jnoortheen.nix-ide
         myriad-dreamin.tinymist
         tomoki1207.pdf
