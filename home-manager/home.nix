@@ -98,11 +98,11 @@
     python311Packages.pygments
 
     # Haskell
-    (haskellPackages.ghcWithPackages (hpkgs: with hpkgs; [
-      stack
+    (haskell.packages.ghc9122.ghcWithPackages (hpkgs: with hpkgs; [
       lens
+      haskell-language-server
+      cabal-install
     ]))
-    haskell-language-server
 
     # JVM
     gradle
@@ -182,7 +182,10 @@
     };
     vscode = {
       enable = true;
+      mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        haskell.haskell
+        justusadam.language-haskell
         james-yu.latex-workshop
         jnoortheen.nix-ide
         myriad-dreamin.tinymist
