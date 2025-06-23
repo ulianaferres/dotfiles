@@ -98,9 +98,11 @@
     python311Packages.pygments
 
     # Haskell
-    ghc
+    (haskellPackages.ghcWithPackages (hpkgs: with hpkgs; [
+      stack
+      lens
+    ]))
     haskell-language-server
-    haskellPackages.stack
 
     # JVM
     gradle
