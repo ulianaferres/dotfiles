@@ -187,6 +187,10 @@
         tomoki1207.pdf
         vscodevim.vim
         k--kato.intellij-idea-keybindings
+        # git stuff
+        donjayamanne.githistory
+        eamodio.gitlens
+        codezombiech.gitignore
       ];
     };
     nano = {
