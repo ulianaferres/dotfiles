@@ -2,7 +2,7 @@
   description = "Alex's PC Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/8bbdfce001a80ddcbed4e81e743919641c9c25d8";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
