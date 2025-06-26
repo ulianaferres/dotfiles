@@ -186,6 +186,7 @@
       enable = true;
       mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        t3dotgg.vsc-material-theme-but-i-wont-sue-you
         haskell.haskell
         justusadam.language-haskell
         james-yu.latex-workshop
