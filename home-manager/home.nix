@@ -102,7 +102,9 @@
       lens
       haskell-language-server
       cabal-install
+      stylish-haskell_0_15_1_0
     ]))
+    z3
 
     # JVM
     gradle
