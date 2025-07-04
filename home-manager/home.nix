@@ -186,6 +186,8 @@
       enable = true;
       mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        mhutchie.git-graph
+        arturock.gitstash
         dafny-lang.ide-vscode
         t3dotgg.vsc-material-theme-but-i-wont-sue-you
         haskell.haskell
