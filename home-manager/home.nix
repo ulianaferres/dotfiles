@@ -13,6 +13,7 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    lean4
     talosctl
     telegram-desktop
     glib
@@ -187,6 +188,7 @@
       enable = true;
       mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        leanprover.lean4
         mhutchie.git-graph
         arturock.gitstash
         dafny-lang.ide-vscode
