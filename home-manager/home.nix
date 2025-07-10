@@ -37,7 +37,6 @@
     inkscape
     gnumake
     cargo
-    wl-clipboard
     qbittorrent
     tree
     zstd

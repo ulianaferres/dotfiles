@@ -18,6 +18,7 @@
     s-tui
     resilio-sync
     proton-pass
+    wl-clipboard
   ];
 
   programs = {
