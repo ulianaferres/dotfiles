@@ -41,20 +41,7 @@
   in {
     packages = forAllSystems (system: import nixpkgs {
       inherit system;
-      overlays = [
-        (final: previous: { algotex = algotex.packages.${system}.default; })
-        (
-          self: super: {
-            haskellPackages = super.haskellPackages.override {
-              overrides = hself: hsuper: {
-                system-fileio = hsuper.system-fileio.overrideAttrs (_: {
-                  doCheck = false;
-                });
-              };
-            };
-          }
-        )
-        ];
+      overlays = [ (final: previous: { algotex = algotex.packages.${system}.default; }) ];
       config = { allowUnfree = true; };
     });
     # Formatter for your nix files, available through 'nix fmt'
