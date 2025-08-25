@@ -13,6 +13,12 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    lean4
+    talosctl
+    telegram-desktop
+    glib
+    typst
+    typstyle
     insomnia
     gimp
     unzip
@@ -31,7 +37,6 @@
     inkscape
     gnumake
     cargo
-    wl-clipboard
     qbittorrent
     tree
     zstd
@@ -94,9 +99,13 @@
     python311Packages.pygments
 
     # Haskell
-    ghc
-    haskell-language-server
-    haskellPackages.stack
+    (haskell.packages.ghc9122.ghcWithPackages (hpkgs: with hpkgs; [
+      lens
+      haskell-language-server
+      cabal-install
+      stylish-haskell_0_15_1_0
+    ]))
+    z3
 
     # JVM
     gradle
@@ -176,8 +185,25 @@
     };
     vscode = {
       enable = true;
+      mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
-       # dafny-lang
+        leanprover.lean4
+        mhutchie.git-graph
+        arturock.gitstash
+        dafny-lang.ide-vscode
+        t3dotgg.vsc-material-theme-but-i-wont-sue-you
+        haskell.haskell
+        justusadam.language-haskell
+        james-yu.latex-workshop
+        jnoortheen.nix-ide
+        myriad-dreamin.tinymist
+        tomoki1207.pdf
+        vscodevim.vim
+        k--kato.intellij-idea-keybindings
+        # git stuff
+        donjayamanne.githistory
+        eamodio.gitlens
+        codezombiech.gitignore
       ];
     };
     nano = {

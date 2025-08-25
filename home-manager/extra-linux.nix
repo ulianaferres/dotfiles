@@ -3,6 +3,8 @@
 {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    nvidia-container-toolkit
+    ollama-cuda
     mission-center
     ethtool
     obs-studio
@@ -16,6 +18,7 @@
     s-tui
     resilio-sync
     proton-pass
+    wl-clipboard
   ];
 
   programs = {
