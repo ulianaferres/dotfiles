@@ -188,6 +188,7 @@
       enable = true;
       mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        Soaibuzzaman.smt-z3
         leanprover.lean4
         mhutchie.git-graph
         arturock.gitstash
