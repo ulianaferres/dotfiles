@@ -181,6 +181,9 @@ in
     users = [ "alex" ];
   };
 
+  hardware.bluetooth.enable = true;
+  hardware.xpadneo.enable = true;
+
   # programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
