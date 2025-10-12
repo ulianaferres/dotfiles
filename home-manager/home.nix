@@ -13,6 +13,10 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    kubernetes-helm
+    fluxcd
+    age
+    sops
     nixfmt-rfc-style
     lean4
     talosctl
@@ -188,6 +192,7 @@
       enable = true;
       mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        redhat.vscode-yaml
         Soaibuzzaman.smt-z3
         leanprover.lean4
         mhutchie.git-graph
