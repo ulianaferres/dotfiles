@@ -25,7 +25,6 @@
     typst
     typstyle
     insomnia
-    gimp
     unzip
     unrar
     vimgolf

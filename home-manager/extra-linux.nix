@@ -19,6 +19,7 @@
     resilio-sync
     proton-pass
     wl-clipboard
+    gimp
   ];
 
   programs = {
