@@ -191,6 +191,7 @@
       enable = true;
       mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        rust-lang.rust-analyzer
         redhat.vscode-yaml
         Soaibuzzaman.smt-z3
         leanprover.lean4
