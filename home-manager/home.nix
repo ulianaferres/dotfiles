@@ -41,6 +41,7 @@
     inkscape
     gnumake
     cargo
+    rustc
     qbittorrent
     tree
     zstd
