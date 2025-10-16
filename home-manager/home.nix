@@ -194,6 +194,7 @@
       profiles.default.extensions = with pkgs.vscode-extensions; [
         rust-lang.rust-analyzer
         redhat.vscode-yaml
+        ms-python.python
         Soaibuzzaman.smt-z3
         leanprover.lean4
         mhutchie.git-graph
