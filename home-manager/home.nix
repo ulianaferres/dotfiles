@@ -193,6 +193,7 @@
       mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
         rust-lang.rust-analyzer
+        ms-kubernetes-tools.vscode-kubernetes-tools
         redhat.vscode-yaml
         ms-python.python
         Soaibuzzaman.smt-z3
