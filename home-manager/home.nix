@@ -14,6 +14,7 @@
 
   home.packages = with pkgs; [
     kubernetes-helm
+    clusterctl
     fluxcd
     age
     sops
