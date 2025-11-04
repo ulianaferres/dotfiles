@@ -33,7 +33,7 @@
     lens
     zoxide
     fzf
-    wireshark
+    #wireshark
     libyaml
     ruby
     coreutils-full
