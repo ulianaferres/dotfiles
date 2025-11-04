@@ -87,7 +87,7 @@
     git-annex
     mpv
     ffmpeg
-    darktable
+    #darktable
     thunderbird
     kotlin
     dafny
