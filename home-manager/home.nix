@@ -194,6 +194,9 @@
       enable = true;
       mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        ms-vscode.cpptools-extension-pack
+        ms-vscode.cmake-tools
+        tamasfe.even-better-toml
         rust-lang.rust-analyzer
         ms-kubernetes-tools.vscode-kubernetes-tools
         redhat.vscode-yaml
