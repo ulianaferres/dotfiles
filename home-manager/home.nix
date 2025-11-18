@@ -106,12 +106,14 @@
     python311Packages.pygments
 
     # Haskell
-    (haskell.packages.ghc9122.ghcWithPackages (hpkgs: with hpkgs; [
-      lens
-      haskell-language-server
-      cabal-install
-      stylish-haskell
-    ]))
+    (haskell.packages.ghc9122.ghcWithPackages (
+      hpkgs: with hpkgs; [
+        lens
+        haskell-language-server
+        cabal-install
+        stylish-haskell
+      ]
+    ))
     z3
 
     # JVM
@@ -231,8 +233,7 @@
     neovim = {
       enable = true;
       defaultEditor = true;
-      extraConfig = ''
-      '';
+      extraConfig = '''';
       extraLuaConfig = ''
         vim.cmd("colorscheme nightfly")
         local metals_config = require("metals").bare_config()
@@ -298,10 +299,6 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentry.package =
-      if pkgs.stdenv.isLinux then
-        pkgs.pinentry-all
-      else
-        pkgs.pinentry_mac;
+    pinentry.package = if pkgs.stdenv.isLinux then pkgs.pinentry-all else pkgs.pinentry_mac;
   };
 }
