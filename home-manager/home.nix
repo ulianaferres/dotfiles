@@ -13,6 +13,13 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    go-task
+    kubernetes-helm
+    clusterctl
+    fluxcd
+    age
+    sops
+    nixfmt-rfc-style
     lean4
     talosctl
     telegram-desktop
@@ -20,7 +27,6 @@
     typst
     typstyle
     insomnia
-    gimp
     unzip
     unrar
     vimgolf
@@ -28,7 +34,7 @@
     lens
     zoxide
     fzf
-    wireshark
+    #wireshark
     libyaml
     ruby
     coreutils-full
@@ -37,6 +43,7 @@
     inkscape
     gnumake
     cargo
+    rustc
     qbittorrent
     tree
     zstd
@@ -68,7 +75,7 @@
     discord
     vesktop
     google-chrome
-    feishin
+    # feishin
     spotify
     neofetch
     jetbrains.idea-ultimate
@@ -81,7 +88,7 @@
     git-annex
     mpv
     ffmpeg
-    darktable
+    #darktable
     thunderbird
     kotlin
     dafny
@@ -99,12 +106,14 @@
     python311Packages.pygments
 
     # Haskell
-    (haskell.packages.ghc9122.ghcWithPackages (hpkgs: with hpkgs; [
-      lens
-      haskell-language-server
-      cabal-install
-      stylish-haskell_0_15_1_0
-    ]))
+    (haskell.packages.ghc9122.ghcWithPackages (
+      hpkgs: with hpkgs; [
+        lens
+        haskell-language-server
+        cabal-install
+        stylish-haskell
+      ]
+    ))
     z3
 
     # JVM
@@ -181,12 +190,20 @@
     };
     java = {
       enable = true;
-      package = pkgs.jdk23;
+      package = pkgs.jdk21;
     };
     vscode = {
       enable = true;
       mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        ms-vscode.cpptools-extension-pack
+        ms-vscode.cmake-tools
+        tamasfe.even-better-toml
+        rust-lang.rust-analyzer
+        ms-kubernetes-tools.vscode-kubernetes-tools
+        redhat.vscode-yaml
+        ms-python.python
+        Soaibuzzaman.smt-z3
         leanprover.lean4
         mhutchie.git-graph
         arturock.gitstash
@@ -216,8 +233,7 @@
     neovim = {
       enable = true;
       defaultEditor = true;
-      extraConfig = ''
-      '';
+      extraConfig = '''';
       extraLuaConfig = ''
         vim.cmd("colorscheme nightfly")
         local metals_config = require("metals").bare_config()
@@ -283,10 +299,6 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentry.package =
-      if pkgs.stdenv.isLinux then
-        pkgs.pinentry-all
-      else
-        pkgs.pinentry_mac;
+    pinentry.package = if pkgs.stdenv.isLinux then pkgs.pinentry-all else pkgs.pinentry_mac;
   };
 }

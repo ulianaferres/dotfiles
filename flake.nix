@@ -71,7 +71,7 @@
               ./home-manager/extra-linux.nix
               ./home-manager/nano-module.nix
             ];
-            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+            home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
             home-manager.extraSpecialArgs = {
               inherit inputs outputs;
               pkgs = self.packages."x86_64-linux";

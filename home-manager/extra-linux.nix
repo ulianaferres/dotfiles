@@ -11,7 +11,7 @@
     pinentry-all
     gamescope
     makemkv
-    whatsapp-for-linux
+    wasistlos
     popsicle
     powertop
     nerd-fonts.droid-sans-mono
@@ -19,6 +19,7 @@
     resilio-sync
     proton-pass
     wl-clipboard
+    gimp
   ];
 
   programs = {
