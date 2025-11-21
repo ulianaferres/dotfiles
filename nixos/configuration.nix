@@ -68,7 +68,6 @@ in
   environment.etc = with pkgs; {
     "jdk17".source = jdk17;
     "jdk21".source = jdk;
-    "jdk23".source = jdk23;
   };
 
   nix = {
