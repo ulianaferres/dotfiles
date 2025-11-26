@@ -194,8 +194,9 @@
     };
     vscode = {
       enable = true;
-      mutableExtensionsDir = false;
+      mutableExtensionsDir = true;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        ms-vscode-remote.remote-ssh
         ms-vscode.cpptools-extension-pack
         ms-vscode.cmake-tools
         tamasfe.even-better-toml
