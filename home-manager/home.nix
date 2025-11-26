@@ -13,6 +13,7 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    cmake
     go-task
     kubernetes-helm
     clusterctl
