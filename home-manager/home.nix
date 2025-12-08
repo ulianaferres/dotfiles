@@ -166,6 +166,11 @@
     # EDITOR = "emacs";
   };
 
+
+  home.shellAliases = {
+    idea = "idea-ultimate";
+  };
+
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
