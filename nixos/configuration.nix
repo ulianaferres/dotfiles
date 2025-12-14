@@ -169,6 +169,7 @@ in
       enable = true;
       package = pkgs.mullvad-vpn;
     };
+    teamviewer.enable = true;
   };
 
   hardware.nvidia = {
