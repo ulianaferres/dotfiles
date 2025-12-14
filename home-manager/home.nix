@@ -197,7 +197,7 @@
     };
     java = {
       enable = true;
-      package = pkgs.jdk21;
+      package = pkgs.jdk25;
     };
     vscode = {
       enable = true;
