@@ -13,6 +13,8 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    clang-tools
+    cmake
     go-task
     kubernetes-helm
     clusterctl
@@ -78,8 +80,6 @@
     # feishin
     spotify
     neofetch
-    jetbrains.idea-ultimate
-    jetbrains.clion
     obsidian
     zotero
     signal-desktop-bin
@@ -124,6 +124,8 @@
     sbt
     scala-cli
     kotlin
+
+    jetbrains-toolbox
   ];
 
   home.file = {
@@ -164,6 +166,11 @@
     # EDITOR = "emacs";
   };
 
+
+  home.shellAliases = {
+    idea = "idea-ultimate";
+  };
+
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
@@ -190,12 +197,13 @@
     };
     java = {
       enable = true;
-      package = pkgs.jdk21;
+      package = pkgs.jdk25;
     };
     vscode = {
       enable = true;
-      mutableExtensionsDir = false;
+      mutableExtensionsDir = true;
       profiles.default.extensions = with pkgs.vscode-extensions; [
+        ms-vscode-remote.remote-ssh
         ms-vscode.cpptools-extension-pack
         ms-vscode.cmake-tools
         tamasfe.even-better-toml

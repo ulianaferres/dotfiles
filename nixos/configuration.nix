@@ -68,6 +68,7 @@ in
   environment.etc = with pkgs; {
     "jdk17".source = jdk17;
     "jdk21".source = jdk;
+    "jdk25".source = jdk25;
   };
 
   nix = {
@@ -168,6 +169,7 @@ in
       enable = true;
       package = pkgs.mullvad-vpn;
     };
+    teamviewer.enable = true;
   };
 
   hardware.nvidia = {
