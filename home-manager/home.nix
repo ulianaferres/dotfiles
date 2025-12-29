@@ -80,8 +80,6 @@
     # feishin
     spotify
     neofetch
-    jetbrains.idea-ultimate
-    jetbrains.clion
     obsidian
     zotero
     signal-desktop-bin
@@ -126,6 +124,8 @@
     sbt
     scala-cli
     kotlin
+
+    jetbrains-toolbox
   ];
 
   home.file = {
