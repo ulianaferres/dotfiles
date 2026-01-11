@@ -13,40 +13,21 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    clang-tools
-    cmake
-    go-task
-    kubernetes-helm
-    clusterctl
-    fluxcd
-    age
-    sops
     nixfmt-rfc-style
-    lean4
-    talosctl
     telegram-desktop
     glib
     typst
     typstyle
-    insomnia
     unzip
     unrar
     vimgolf
     p7zip
-    lens
     zoxide
     fzf
-    #wireshark
-    libyaml
-    ruby
     coreutils-full
     git-quick-stats
     gnumake
     inkscape
-    gnumake
-    cargo
-    rustc
-    qbittorrent
     tree
     zstd
     walk
@@ -61,12 +42,9 @@
     tmux
     ipmitool
     teams-for-linux
-    gst_all_1.gstreamer
-    yarn
     screen
     killall
     file
-    gh
     gcc
     fastfetch
     algotex
@@ -85,47 +63,17 @@
     signal-desktop-bin
     prismlauncher
     git
-    git-annex
     mpv
     ffmpeg
     #darktable
     thunderbird
-    kotlin
-    dafny
-    dotnet-sdk
-    k9s
-    kubectl
-    minikube
     zoom-us
     wget
     cabextract
-    podman
     ookla-speedtest
     iperf
     iperf2
     python311Packages.pygments
-
-    # Haskell
-    (haskell.packages.ghc9122.ghcWithPackages (
-      hpkgs: with hpkgs; [
-        lens
-        haskell-language-server
-        cabal-install
-        stylish-haskell
-      ]
-    ))
-    z3
-
-    # JVM
-    gradle
-    scala
-    metals
-    coursier
-    sbt
-    scala-cli
-    kotlin
-
-    jetbrains-toolbox
   ];
 
   home.file = {
@@ -166,11 +114,6 @@
     # EDITOR = "emacs";
   };
 
-
-  home.shellAliases = {
-    idea = "idea-ultimate";
-  };
-
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
@@ -204,21 +147,12 @@
       mutableExtensionsDir = true;
       profiles.default.extensions = with pkgs.vscode-extensions; [
         ms-vscode-remote.remote-ssh
-        ms-vscode.cpptools-extension-pack
-        ms-vscode.cmake-tools
         tamasfe.even-better-toml
-        rust-lang.rust-analyzer
-        ms-kubernetes-tools.vscode-kubernetes-tools
         redhat.vscode-yaml
         ms-python.python
-        Soaibuzzaman.smt-z3
-        leanprover.lean4
         mhutchie.git-graph
         arturock.gitstash
-        dafny-lang.ide-vscode
         t3dotgg.vsc-material-theme-but-i-wont-sue-you
-        haskell.haskell
-        justusadam.language-haskell
         james-yu.latex-workshop
         jnoortheen.nix-ide
         myriad-dreamin.tinymist
