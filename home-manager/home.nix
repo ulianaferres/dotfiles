@@ -77,7 +77,7 @@
     discord
     vesktop
     google-chrome
-    # feishin
+    feishin
     spotify
     neofetch
     obsidian
