@@ -636,6 +636,14 @@ require('lze').load {
       })
     end,
   },
+  {
+    "fidget.nvim",
+    enabled = nixCats('general') or false,
+    event = "LspAttach",
+    after = function(plugin)
+      require("fidget").setup({})
+    end,
+  },
 }
 
 local function lsp_on_attach(_, bufnr)
@@ -794,13 +802,11 @@ require('lze').load {
     end,
     after = function(plugin)
       local metals_config = require("metals").bare_config()
+      metals_config.init_options.statusBarProvider = "off"
       metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      -- Point to Nix-installed metals binary
       metals_config.settings = {
-        metalsBinaryPath = vim.fn.exepath("metals"),  -- Use metals from PATH
-        -- Or explicitly point to coursier:
-        -- useGlobalExecutable = true,
+        metalsBinaryPath = vim.fn.exepath("metals"),
       }
 
       metals_config.on_attach = function(client, bufnr)

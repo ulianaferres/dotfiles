@@ -106,6 +106,7 @@ in {
             vim-tmux-navigator
             nvim-metals
             nvim-dap
+            fidget-nvim
           ];
         };
 
