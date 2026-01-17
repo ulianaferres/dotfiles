@@ -659,6 +659,10 @@ local function lsp_on_attach(_, bufnr)
   -- we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
 
+  vim.keymap.set("n", "<C-A-l>", function()
+    vim.lsp.buf.format({ async = true })
+  end, { desc = "Format (LSP)" })
+
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -821,6 +825,9 @@ require('lze').load {
       metals_config.on_attach = function(client, bufnr)
         require("metals").setup_dap()
         lsp_on_attach(client, bufnr)
+        vim.keymap.set("n", "<C-A-o>", "<cmd>MetalsOrganizeImports<CR>", {
+          desc = "Metals: organize imports",
+        })
       end
 
       local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
