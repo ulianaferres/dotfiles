@@ -85,6 +85,11 @@ in {
             go-tools
             go
           ];
+          scala = with pkgs; [
+            metals
+            coursier
+            jdk25
+          ];
         };
 
         # This is for plugins that will load at startup without using packadd:
@@ -99,6 +104,8 @@ in {
             vim-sleuth
             nightfly
             vim-tmux-navigator
+            nvim-metals
+            nvim-dap
           ];
         };
 

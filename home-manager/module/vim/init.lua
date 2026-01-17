@@ -774,4 +774,37 @@ require('lze').load {
       },
     },
   },
+  {
+    "scalameta/nvim-metals",
+    ft = { "scala", "sbt", "java" },
+    on_require = "metals",
+    load = function(name)
+      vim.cmd.packadd(name)
+    end,
+    after = function(plugin)
+      local metals_config = require("metals").bare_config()
+      metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
+
+      -- Point to Nix-installed metals binary
+      metals_config.settings = {
+        metalsBinaryPath = vim.fn.exepath("metals"),  -- Use metals from PATH
+        -- Or explicitly point to coursier:
+        -- useGlobalExecutable = true,
+      }
+
+      metals_config.on_attach = function(client, bufnr)
+        require("metals").setup_dap()
+        lsp_on_attach(client, bufnr)
+      end
+
+      local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "scala", "sbt", "java" },
+        callback = function()
+          require("metals").initialize_or_attach(metals_config)
+        end,
+        group = nvim_metals_group,
+      })
+    end,
+  }
 }
