@@ -97,6 +97,7 @@ in {
             snacks-nvim
             onedark-nvim
             vim-sleuth
+            nightfly
           ];
         };
 
@@ -124,11 +125,7 @@ in {
             nvim-dap
             nvim-dap-ui
             nvim-dap-virtual-text
-
-#            vim-fugitive
-#            plenary-nvim
-#            vim-tmux-navigator
-#            nightfly
+            vim-tmux-navigator
           ];
           scala = with pkgs.vimPlugins; [
             nvim-metals
@@ -191,6 +188,7 @@ in {
             general = true;
             lua = true;
             nix = true;
+            scala = true;
             go = false;
           };
           # anything else to pass and grab in lua with `nixCats.extra`
