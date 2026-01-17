@@ -98,6 +98,7 @@ in {
             onedark-nvim
             vim-sleuth
             nightfly
+            vim-tmux-navigator
           ];
         };
 
@@ -125,7 +126,6 @@ in {
             nvim-dap
             nvim-dap-ui
             nvim-dap-virtual-text
-            vim-tmux-navigator
           ];
           scala = with pkgs.vimPlugins; [
             nvim-metals
