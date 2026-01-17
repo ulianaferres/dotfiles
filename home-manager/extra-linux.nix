@@ -30,6 +30,12 @@
         clickItemTo = "select";
         lookAndFeel = "org.kde.breezedark.desktop";
       };
+
+      hotkeys.commands."launch-kitty" = {
+        name = "Launch Kitty";
+        key = "Meta+Return";
+        command = "kitty";
+      };
     };
   };
 }
