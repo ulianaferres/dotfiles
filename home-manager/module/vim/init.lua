@@ -282,6 +282,14 @@ require('lze').load {
       require('mini.pairs').setup()
       require('mini.icons').setup()
       require('mini.ai').setup()
+      require('mini.comment').setup({
+        mappings = {
+          comment = '<C-_>',
+          comment_line = '<C-_>',
+          comment_visual = '<C-_>',
+          textobject = 'gc',
+        },
+      })
     end,
   },
   {
