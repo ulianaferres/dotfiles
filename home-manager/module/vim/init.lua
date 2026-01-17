@@ -828,6 +828,9 @@ require('lze').load {
         vim.keymap.set("n", "<C-A-o>", "<cmd>MetalsOrganizeImports<CR>", {
           desc = "Metals: organize imports",
         })
+        vim.keymap.set("n", "<M-CR>", function()
+          vim.lsp.buf.code_action()
+        end, { desc = "Code action" })
       end
 
       local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
