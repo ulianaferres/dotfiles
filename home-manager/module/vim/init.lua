@@ -199,7 +199,7 @@ require('lze').load {
     after = function (plugin)
       -- [[ Configure Treesitter ]]
       -- See `:help nvim-treesitter`
-      require('nvim-treesitter.configs').setup {
+      require('nvim-treesitter').setup {
         highlight = { enable = true, },
         indent = { enable = false, },
         incremental_selection = {
@@ -211,7 +211,20 @@ require('lze').load {
             node_decremental = '<M-space>',
           },
         },
-        textobjects = {
+      }
+
+      -- Enable highlighting via FileType autocmd (new in main branch)
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(event)
+          local lang = vim.treesitter.language.get_lang(event.match) or event.match
+          pcall(vim.treesitter.start, event.buf, lang)
+        end,
+        group = vim.api.nvim_create_augroup('TreesitterHighlight', { clear = true }),
+      })
+
+      -- Setup textobjects (separate module, no longer in .configs)
+      if pcall(require, 'nvim-treesitter-textobjects') then
+        require('nvim-treesitter-textobjects').setup {
           select = {
             enable = true,
             lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
@@ -254,8 +267,8 @@ require('lze').load {
               ['<leader>A'] = '@parameter.inner',
             },
           },
-        },
-      }
+        }
+      end
     end,
   },
   {
