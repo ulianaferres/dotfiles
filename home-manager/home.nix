@@ -218,60 +218,6 @@
         set tabstospaces
       '';
     };
-#    neovim = {
-#      enable = true;
-#      defaultEditor = true;
-#      extraConfig = '''';
-#      extraLuaConfig = ''
-#        vim.opt.splitright = true
-#        vim.cmd("colorscheme nightfly")
-#        local metals_config = require("metals").bare_config()
-#        metals_config.settings = {
-#          showImplicitArguments = true,
-#          excludedPackages = { "akka.actor.typed.javadsl" }
-#        }
-#        vim.api.nvim_create_autocmd("FileType", {
-#          pattern = { "scala", "sbt", "java" },
-#          callback = function()
-#            require("metals").initialize_or_attach(metals_config)
-#          end
-#        })
-#      '';
-#      plugins = with pkgs.vimPlugins; [
-#        ale
-#        {
-#          plugin = deoplete-nvim;
-#          config = ''
-#            let g:deoplete#enable_at_startup = 1
-#            set completeopt=menu,noinsert
-#          '';
-#        }
-#        {
-#          plugin = deoplete-lsp;
-#          config = ''
-#            " g:deoplete#lsp#handler_enabled = 1
-#          '';
-#        }
-#        {
-#          plugin = nerdtree;
-#          config = ''
-#            " Exit Vim if NERDTree is the only window remaining in the only tab.
-#            autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
-#            " Close the tab if NERDTree is the only window remaining in it.
-#            autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
-#          '';
-#        }
-#        {
-#          plugin = telescope-nvim;
-#          config = ''
-#            nnoremap ff <cmd>Telescope find_files<cr>
-#            nnoremap fg <cmd>Telescope live_grep<cr>
-#            nnoremap f:b <cmd>Telescope buffers<cr>
-#            nnoremap fh <cmd>Telescope help_tags<cr>
-#          '';
-#        }
-#      ];
-#    };
   };
 
   services.gpg-agent = {
