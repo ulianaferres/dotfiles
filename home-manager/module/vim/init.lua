@@ -173,7 +173,10 @@ require('lze').load {
       require("blink.cmp").setup({
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
         -- See :h blink-cmp-config-keymap for configuring keymaps
-        keymap = { preset = 'default' },
+        keymap = {
+          preset = 'default',
+          ['<CR>'] = { 'select_and_accept', 'fallback' },
+        },
         appearance = {
           nerd_font_variant = 'mono'
         },
