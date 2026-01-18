@@ -102,7 +102,7 @@ in {
             snacks-nvim
             onedark-nvim
             vim-sleuth
-            nightfly
+            material-nvim
             vim-tmux-navigator
             nvim-metals
             nvim-dap

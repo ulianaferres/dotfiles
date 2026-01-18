@@ -50,7 +50,7 @@ vim.o.smartcase = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
-vim.wo.relativenumber = true
+vim.wo.relativenumber = false
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -87,8 +87,8 @@ vim.o.splitright = true
 -- (optional) all horizontal splits go below
 vim.o.splitbelow = true
 
-vim.g.netrw_liststyle=0
-vim.g.netrw_banner=0
+vim.g.netrw_liststyle = 0
+vim.g.netrw_banner = 0
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -148,13 +148,46 @@ vim.diagnostic.config({
 -- vim.o.clipboard = 'unnamedplus'
 
 -- You should instead use these keybindings so that they are still easy to use, but dont conflict
-vim.keymap.set({"v", "x", "n"}, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
-vim.keymap.set({"n", "v", "x"}, '<leader>Y', '"+yy', { noremap = true, silent = true, desc = 'Yank line to clipboard' })
-vim.keymap.set({'n', 'v', 'x'}, '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
-vim.keymap.set('i', '<C-p>', '<C-r><C-p>+', { noremap = true, silent = true, desc = 'Paste from clipboard from within insert mode' })
-vim.keymap.set("x", "<leader>P", '"_dP', { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
+vim.keymap.set({ "v", "x", "n" }, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
+vim.keymap.set({ "n", "v", "x" }, '<leader>Y', '"+yy', { noremap = true, silent = true, desc = 'Yank line to clipboard' })
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
+vim.keymap.set('i', '<C-p>', '<C-r><C-p>+',
+  { noremap = true, silent = true, desc = 'Paste from clipboard from within insert mode' })
+vim.keymap.set("x", "<leader>P", '"_dP',
+  { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
 
-vim.cmd.colorscheme('nightfly')
+vim.g.material_style = "deep ocean"
+require("material").setup({
+  plugins = {
+    "blink",
+    "dap",
+    "fidget",
+    "gitsigns",
+    "mini",
+    "which-key",
+  },
+  custom_highlights = {
+    ["@type"] = { fg = "#FFCB6B" },
+    ["@variable.parameter"] = { fg = "#F78C6C" },
+    ["@keyword"] = { fg = "#C792EA" },
+    ["@attribute"] = { fg = "#8266FF" },
+  }
+})
+
+vim.keymap.set('n', '<leader>hi', function()
+  local syn_id = vim.fn.synID(vim.fn.line('.'), vim.fn.col('.'), 1)
+  local syn_name = vim.fn.synIDattr(syn_id, 'name')
+
+  local ts_captures = vim.treesitter.get_captures_at_pos(0, vim.fn.line('.') - 1, vim.fn.col('.') - 1)
+
+  vim.notify(
+    'Syntax: ' .. (syn_name ~= '' and syn_name or 'none') .. '\n' ..
+    'TreeSitter: ' .. vim.inspect(ts_captures),
+    vim.log.levels.INFO
+  )
+end, { desc = 'Show highlight group under cursor' })
+
+vim.cmd.colorscheme('material')
 require("snacks").setup({
   explorer = {},
   picker = {},
@@ -203,7 +236,7 @@ require('lze').load {
     enabled = nixCats('general') or false,
     event = "DeferredUIEnter",
     on_require = "blink",
-    after = function (plugin)
+    after = function(plugin)
       require("blink.cmp").setup({
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
         -- See :h blink-cmp-config-keymap for configuring keymaps
@@ -229,11 +262,11 @@ require('lze').load {
     -- ft = "",
     -- keys = "",
     -- colorscheme = "",
-    load = function (name)
-        vim.cmd.packadd(name)
-        vim.cmd.packadd("nvim-treesitter-textobjects")
+    load = function(name)
+      vim.cmd.packadd(name)
+      vim.cmd.packadd("nvim-treesitter-textobjects")
     end,
-    after = function (plugin)
+    after = function(plugin)
       -- [[ Configure Treesitter ]]
       -- See `:help nvim-treesitter`
       require('nvim-treesitter').setup {
@@ -312,7 +345,7 @@ require('lze').load {
     "mini.nvim",
     enabled = nixCats('general') or false,
     event = "DeferredUIEnter",
-    after = function (plugin)
+    after = function(plugin)
       require('mini.pairs').setup()
       require('mini.icons').setup()
       require('mini.ai').setup()
@@ -344,16 +377,15 @@ require('lze').load {
     -- ft = "",
     -- keys = "",
     -- colorscheme = "",
-    load = function (name)
+    load = function(name)
       vim.cmd.packadd(name)
       vim.cmd.packadd("lualine-lsp-progress")
     end,
-    after = function (plugin)
-
+    after = function(plugin)
       require('lualine').setup({
         options = {
           icons_enabled = false,
-          theme = 'nightfly',
+          theme = 'material',
           component_separators = '|',
           section_separators = '',
         },
@@ -370,7 +402,7 @@ require('lze').load {
               'filename', path = 3, status = true,
             },
           },
-          lualine_x = {'filetype'},
+          lualine_x = { 'filetype' },
         },
         tabline = {
           lualine_a = { 'buffers' },
@@ -388,7 +420,7 @@ require('lze').load {
     -- ft = "",
     -- keys = "",
     -- colorscheme = "",
-    after = function (plugin)
+    after = function(plugin)
       require('gitsigns').setup({
         -- See `:help gitsigns.txt`
         signs = {
@@ -468,27 +500,27 @@ require('lze').load {
     "which-key.nvim",
     enabled = nixCats('general') or false,
     event = "DeferredUIEnter",
-    after = function (plugin)
+    after = function(plugin)
       require('which-key').setup({})
       require('which-key').add {
-        { "<leader><leader>", group = "buffer commands" },
+        { "<leader><leader>",  group = "buffer commands" },
         { "<leader><leader>_", hidden = true },
-        { "<leader>c", group = "[c]ode" },
-        { "<leader>c_", hidden = true },
-        { "<leader>d", group = "[d]ocument" },
-        { "<leader>d_", hidden = true },
-        { "<leader>g", group = "[g]it" },
-        { "<leader>g_", hidden = true },
-        { "<leader>r", group = "[r]ename" },
-        { "<leader>r_", hidden = true },
-        { "<leader>f", group = "[f]ind" },
-        { "<leader>f_", hidden = true },
-        { "<leader>s", group = "[s]earch" },
-        { "<leader>s_", hidden = true },
-        { "<leader>t", group = "[t]oggles" },
-        { "<leader>t_", hidden = true },
-        { "<leader>w", group = "[w]orkspace" },
-        { "<leader>w_", hidden = true },
+        { "<leader>c",         group = "[c]ode" },
+        { "<leader>c_",        hidden = true },
+        { "<leader>d",         group = "[d]ocument" },
+        { "<leader>d_",        hidden = true },
+        { "<leader>g",         group = "[g]it" },
+        { "<leader>g_",        hidden = true },
+        { "<leader>r",         group = "[r]ename" },
+        { "<leader>r_",        hidden = true },
+        { "<leader>f",         group = "[f]ind" },
+        { "<leader>f_",        hidden = true },
+        { "<leader>s",         group = "[s]earch" },
+        { "<leader>s_",        hidden = true },
+        { "<leader>t",         group = "[t]oggles" },
+        { "<leader>t_",        hidden = true },
+        { "<leader>w",         group = "[w]orkspace" },
+        { "<leader>w_",        hidden = true },
       }
     end,
   },
@@ -496,7 +528,7 @@ require('lze').load {
     "nvim-lint",
     enabled = nixCats('general') or false,
     event = "FileType",
-    after = function (plugin)
+    after = function(plugin)
       require('lint').linters_by_ft = {
         -- NOTE: download some linters in lspsAndRuntimeDeps
         -- and configure them here
@@ -520,7 +552,7 @@ require('lze').load {
       { "<leader>FF", desc = "[F]ormat [F]ile" },
     },
     -- colorscheme = "",
-    after = function (plugin)
+    after = function(plugin)
       local conform = require("conform")
 
       conform.setup({
@@ -553,13 +585,13 @@ require('lze').load {
     -- event = "",
     -- ft = "",
     keys = {
-      { "<F5>", desc = "Debug: Start/Continue" },
-      { "<F1>", desc = "Debug: Step Into" },
-      { "<F2>", desc = "Debug: Step Over" },
-      { "<F3>", desc = "Debug: Step Out" },
+      { "<F5>",      desc = "Debug: Start/Continue" },
+      { "<F1>",      desc = "Debug: Step Into" },
+      { "<F2>",      desc = "Debug: Step Over" },
+      { "<F3>",      desc = "Debug: Step Out" },
       { "<leader>b", desc = "Debug: Toggle Breakpoint" },
       { "<leader>B", desc = "Debug: Set Breakpoint" },
-      { "<F7>", desc = "Debug: See last session result." },
+      { "<F7>",      desc = "Debug: See last session result." },
     },
     -- colorscheme = "",
     load = function(name)
@@ -567,7 +599,7 @@ require('lze').load {
       vim.cmd.packadd("nvim-dap-ui")
       vim.cmd.packadd("nvim-dap-virtual-text")
     end,
-    after = function (plugin)
+    after = function(plugin)
       local dap = require 'dap'
       local dapui = require 'dapui'
 
@@ -611,15 +643,15 @@ require('lze').load {
       }
 
       require("nvim-dap-virtual-text").setup {
-        enabled = true,                       -- enable this plugin (the default)
-        enabled_commands = true,              -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
-        highlight_changed_variables = true,   -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-        highlight_new_as_changed = false,     -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
-        show_stop_reason = true,              -- show stop reason when stopped for exceptions
-        commented = false,                    -- prefix virtual text with comment string
-        only_first_definition = true,         -- only show virtual text at first definition (if there are multiple)
-        all_references = false,               -- show virtual text on all all references of the variable (not only definitions)
-        clear_on_continue = false,            -- clear virtual text on "continue" (might cause flickering when stepping)
+        enabled = true,                     -- enable this plugin (the default)
+        enabled_commands = true,            -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+        highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+        highlight_new_as_changed = false,   -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+        show_stop_reason = true,            -- show stop reason when stopped for exceptions
+        commented = false,                  -- prefix virtual text with comment string
+        only_first_definition = true,       -- only show virtual text at first definition (if there are multiple)
+        all_references = false,             -- show virtual text on all all references of the variable (not only definitions)
+        clear_on_continue = false,          -- clear virtual text on "continue" (might cause flickering when stepping)
         --- A callback that determines how a variable is displayed or whether it should be omitted
         --- variable Variable https://microsoft.github.io/debug-adapter-protocol/specification#Types_Variable
         --- buf number
@@ -638,9 +670,9 @@ require('lze').load {
         virt_text_pos = vim.fn.has 'nvim-0.10' == 1 and 'inline' or 'eol',
 
         -- experimental features:
-        all_frames = false,       -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
-        virt_lines = false,       -- show virtual lines instead of virtual text (will flicker!)
-        virt_text_win_col = nil   -- position the virtual text at a fixed window column (starting from the first text column) ,
+        all_frames = false,     -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
+        virt_lines = false,     -- show virtual lines instead of virtual text (will flicker!)
+        virt_text_win_col = nil -- position the virtual text at a fixed window column (starting from the first text column) ,
         -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
       }
 
@@ -684,10 +716,6 @@ local function lsp_on_attach(_, bufnr)
   -- we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
 
-  vim.keymap.set("n", "<C-A-l>", function()
-    vim.lsp.buf.format({ async = true })
-  end, { desc = "Format (LSP)" })
-
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -701,17 +729,23 @@ local function lsp_on_attach(_, bufnr)
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 
   if nixCats('general') then
-    nmap('gr', function() Snacks.picker.lsp_references() end, '[G]oto [R]eferences')
-    nmap('gI', function() Snacks.picker.lsp_implementations() end, '[G]oto [I]mplementation')
-    nmap('<leader>ds', function() Snacks.picker.lsp_symbols() end, '[D]ocument [S]ymbols')
-    nmap('<leader>ws', function() Snacks.picker.lsp_workspace_symbols() end, '[W]orkspace [S]ymbols')
+    nmap('gr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
+    nmap('gI', Snacks.picker.lsp_implementations, '[G]oto [I]mplementation')
+    nmap('fj', vim.lsp.buf.definition, 'Goto Definition')
+    nmap('fk', function()
+      vim.cmd('vsplit')
+      vim.lsp.buf.definition()
+    end, 'Goto Definition in vsplit')
+    nmap('<leader>ds', Snacks.picker.lsp_symbols, '[D]ocument [S]ymbols')
+    nmap('<leader>ws', Snacks.picker.lsp_workspace_symbols, '[W]orkspace [S]ymbols')
+    nmap('<C-A-l>', function() vim.lsp.buf.format({ async = true }) end, 'Format File')
   end
 
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation') -- interferes with window movement
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -725,7 +759,6 @@ local function lsp_on_attach(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
-
 end
 
 -- NOTE: Register a handler from lzextras. This one makes it so that
