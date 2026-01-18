@@ -116,8 +116,25 @@ vim.keymap.set('n', 'd[', function() vim.diagnostic.jump({ count = -1 }) end, { 
 vim.keymap.set('n', 'd]', function() vim.diagnostic.jump({ count = 1 }) end, { desc = 'Next diagnostic' })
 vim.diagnostic.config({
   virtual_text = {
-    prefix = '●',
+    enabled = true,
+    prefix = function(diagnostic)
+      if diagnostic.severity == vim.diagnostic.severity.ERROR then
+        return "×"
+      elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+        return "▲"
+      else
+        return "●"
+      end
+    end,
     spacing = 2,
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ×",
+      [vim.diagnostic.severity.WARN] = " ▲",
+      [vim.diagnostic.severity.HINT] = " ●",
+      [vim.diagnostic.severity.INFO] = " ●",
+    },
   },
 })
 
