@@ -82,6 +82,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- Global option: all vsplits go to the right
+vim.o.splitright = true
+-- (optional) all horizontal splits go below
+vim.o.splitbelow = true
+
 vim.g.netrw_liststyle=0
 vim.g.netrw_banner=0
 -- [[ Basic Keymaps ]]
