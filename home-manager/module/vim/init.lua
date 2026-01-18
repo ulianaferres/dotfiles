@@ -150,6 +150,7 @@ require("snacks").setup({
   indent = {},
   gitbrowse = {},
   scope = {},
+  buffer = {},
 })
 vim.keymap.set("n", "-", function() Snacks.explorer.open() end, { desc = 'Snacks Explorer' })
 vim.keymap.set("n", "<c-`>", function() Snacks.terminal.open() end, { desc = 'Snacks Terminal' })
@@ -177,6 +178,8 @@ vim.keymap.set('n', "<leader>sM", function() Snacks.picker.man() end, { desc = "
 vim.keymap.set('n', "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" })
 vim.keymap.set('n', "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" })
 vim.keymap.set('n', "<leader>su", function() Snacks.picker.undo() end, { desc = "Undo History" })
+vim.keymap.set("n", "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers (Snacks)" })
+
 require('lze').load {
   {
     "blink.cmp",
