@@ -78,6 +78,7 @@ in {
             ripgrep
             fd
             lean4
+            termpdfpy
           ];
           lua = with pkgs; [
             lua-language-server
@@ -120,6 +121,7 @@ in {
             fidget-nvim
             lean-nvim
             plenary-nvim
+            vimtex
           ];
         };
 

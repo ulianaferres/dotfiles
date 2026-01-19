@@ -918,6 +918,31 @@ require('lze').load {
     "leanls",
     enabled = nixCats("general") or false,
     ft = { "lean" },
-    lsp = { },
   },
+  {
+    "vimtex",
+    enabled = nixCats("general") or false,
+    ft = { "tex", "latex" },
+    before = function(_)
+      vim.g.vimtex_view_method = "skim"
+      vim.g.vimtex_compiler_method = "latexmk"
+      vim.g.vimtex_compiler_latexmk = {
+        aux_dir = "build",
+        out_dir = "build",
+        callback = 1,
+        continuous = 1,
+      }
+      vim.g.vimtex_quickfix_mode = 0
+    end,
+    after = function(_)
+      local group = vim.api.nvim_create_augroup("vimtex_event_listener", { clear = true })
+      vim.api.nvim_create_autocmd("User", {
+        group = group,
+        pattern = "VimtexEventViewReverse",
+        callback = function(event)
+          vim.cmd(string.format("execute 'drop %s' | %d", event.data.src[1], event.data.src[2]))
+        end,
+      })
+    end,
+  }
 }
