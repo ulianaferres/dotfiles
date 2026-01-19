@@ -900,5 +900,24 @@ require('lze').load {
         group = nvim_metals_group,
       })
     end,
-  }
+  },
+  {
+    "lean-nvim",
+    enabled = nixCats("general") or false,
+    ft = { "lean" },
+    load = function(name)
+      vim.cmd.packadd(name)
+    end,
+    after = function()
+      require("lean").setup({
+        mappings = true,
+      })
+    end,
+  },
+  {
+    "leanls",
+    enabled = nixCats("general") or false,
+    ft = { "lean" },
+    lsp = { },
+  },
 }

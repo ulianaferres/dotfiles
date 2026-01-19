@@ -76,6 +76,8 @@ in {
           general = with pkgs; [
             lazygit
             ripgrep
+            fd
+            lean4
           ];
           lua = with pkgs; [
             lua-language-server
@@ -116,6 +118,8 @@ in {
             nvim-metals
             nvim-dap
             fidget-nvim
+            lean-nvim
+            plenary-nvim
           ];
         };
 
