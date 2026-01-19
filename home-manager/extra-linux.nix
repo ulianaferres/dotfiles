@@ -14,7 +14,6 @@
     wasistlos
     popsicle
     powertop
-    nerd-fonts.droid-sans-mono
     s-tui
     resilio-sync
     proton-pass

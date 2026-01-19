@@ -93,6 +93,7 @@
           home-manager.darwinModules.home-manager {
             home-manager.users.alex.imports = [
               ./home-manager/home.nix
+              ./home-manager/module/vim
               ./home-manager/extra-macos.nix
               ./home-manager/nano-module.nix
             ];

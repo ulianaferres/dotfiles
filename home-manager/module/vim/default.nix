@@ -31,9 +31,17 @@ in {
       '';
     };
 
-    #home.sessionVariables = {
-    #  EDITOR = "nvim";
-    #};
+    home.sessionVariables = {
+     EDITOR = "vim";
+    };
+
+    programs.zsh.initContent = ''
+      tvim() {
+        local dir="''${1:-.}"
+        tmux new-session -A -s tvim "cd \"''${dir}\" && vim"
+      }
+    '';
+
     # this value, nixCats is the defaultPackageName you pass to mkNixosModules
     # it will be the namespace for your options.
     nixCats = {
@@ -67,6 +75,7 @@ in {
         lspsAndRuntimeDeps = {
           general = with pkgs; [
             lazygit
+            ripgrep
           ];
           lua = with pkgs; [
             lua-language-server

@@ -13,6 +13,7 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    nerd-fonts.droid-sans-mono
     kitty
     clang-tools
     cmake
@@ -22,7 +23,7 @@
     fluxcd
     age
     sops
-    nixfmt-rfc-style
+    nixfmt
     lean4
     talosctl
     telegram-desktop
