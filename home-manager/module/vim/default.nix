@@ -78,7 +78,6 @@ in {
             ripgrep
             fd
             lean4
-            termpdfpy
           ];
           lua = with pkgs; [
             lua-language-server
