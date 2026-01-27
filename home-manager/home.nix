@@ -14,6 +14,7 @@
 
   home.packages = with pkgs; [
     nerd-fonts.droid-sans-mono
+    font-awesome
     kitty
     clang-tools
     cmake
