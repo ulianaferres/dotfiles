@@ -1,4 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 let
   zfsCompatibleKernelPackages = lib.filterAttrs (
@@ -15,10 +21,16 @@ let
   );
 in
 {
-  imports =
-    [
-      (import ./hardware-configuration.nix { inherit config lib pkgs modulesPath; })
-    ];
+  imports = [
+    (import ./hardware-configuration.nix {
+      inherit
+        config
+        lib
+        pkgs
+        modulesPath
+        ;
+    })
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -35,7 +47,9 @@ in
       defaultNetwork.settings.dns_enabled = true;
     };
   };
-  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
 
   # Useful other development tools
   boot.kernelPackages = latestKernelPackage;
@@ -88,10 +102,8 @@ in
   '';
 
   networking.hostId = "f3eff353";
-  networking.hostName = "desktopalex"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.hostName = "desktopalex";
+  networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -119,7 +131,11 @@ in
       shell = pkgs.zsh;
       home = "/home/alex";
       isNormalUser = true;
-      extraGroups = [ "wheel" "docker" "openrazer" ];
+      extraGroups = [
+        "wheel"
+        "docker"
+        "openrazer"
+      ];
     };
   };
 
