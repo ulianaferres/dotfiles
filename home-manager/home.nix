@@ -55,7 +55,6 @@
     walk
     rsync
     watch
-    tmux
     bmon
     nmap
     ncdu

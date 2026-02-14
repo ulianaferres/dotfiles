@@ -28,6 +28,35 @@ in {
         bind-key -T copy-mode-vi 'C-k' select-pane -U
         bind-key -T copy-mode-vi 'C-l' select-pane -R
         bind-key -T copy-mode-vi 'C-\' select-pane -l
+
+        setw -g mode-keys vi
+
+        set-option -g set-clipboard external
+        bind-key -T copy-mode-vi v send-keys -X begin-selection
+        bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'pbcopy'
+        bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'pbcopy'
+
+        bind "\"" split-window -c '#{pane_current_path}'
+        bind "\%" split-window -h -c '#{pane_current_path}'
+
+        set -g default-terminal "screen-256color"
+        set -g status-style 'fg=green,bg=#040417'
+        #set -g status-style 'fg=green,bg=#000000'
+
+        #setw -g window-status-style 'fg=cyan,bg=#1C1C1C,dim'
+        #setw -g window-status-current-style 'fg=green,bg=#1C1C1C,bright'
+        setw -g window-status-style 'fg=cyan,bg=#000000,dim'
+        setw -g window-status-current-style 'fg=green,bg=#000000,bright'
+
+        #set -g pane-border-style 'fg=cyan,bg=#1C1C1C'
+        #set -g pane-active-border-style 'fg=green,bg=#1C1C1C'
+        set -g pane-border-style 'fg=cyan,bg=#000000'
+        set -g pane-active-border-style 'fg=green,bg=#000000'
+
+        #set -g message-style 'fg=green,bg=#1C1C1C,bright'
+        set -g message-style 'fg=green,bg=#000000,bright'
+
+        set -g clock-mode-colour cyan
       '';
     };
 
