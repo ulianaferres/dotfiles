@@ -20,6 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    nixCats.url = "github:BirdeeHub/nixCats-nvim";
   };
 
   outputs = {
@@ -29,6 +30,7 @@
     home-manager,
     algotex,
     plasma-manager,
+    nixCats,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -68,12 +70,13 @@
           home-manager.nixosModules.home-manager {
             home-manager.users.uliana.imports = [
               ./home-manager/home.nix
+              ./home-manager/module/vim
               ./home-manager/extra-linux.nix
               ./home-manager/nano-module.nix
             ];
             home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
             home-manager.extraSpecialArgs = {
-              inherit inputs outputs;
+              inherit inputs outputs nixCats;
               pkgs = self.packages."x86_64-linux";
             };
           }
@@ -90,6 +93,7 @@
           home-manager.darwinModules.home-manager {
             home-manager.users.uliana.imports = [
               ./home-manager/home.nix
+              ./home-manager/module/vim
               ./home-manager/extra-macos.nix
               ./home-manager/nano-module.nix
             ];

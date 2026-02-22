@@ -13,7 +13,10 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    nixfmt-rfc-style
+    nerd-fonts.jetbrains-mono
+    font-awesome
+    kitty
+    nixfmt
     telegram-desktop
     glib
     typst
@@ -33,7 +36,6 @@
     walk
     rsync
     watch
-    tmux
     bmon
     nmap
     ncdu
@@ -55,7 +57,7 @@
     discord
     vesktop
     google-chrome
-    # feishin
+    feishin
     spotify
     neofetch
     obsidian
@@ -87,27 +89,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    ".tmux.conf".text = ''
-      # Smart pane switching with awareness of Vim splits.
-      # See: https://github.com/christoomey/vim-tmux-navigator
-      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-          | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?|fzf)(diff)?$'"
-      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
-      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
-      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
-      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
-      tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-          "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
-      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-          "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
-
-      bind-key -T copy-mode-vi 'C-h' select-pane -L
-      bind-key -T copy-mode-vi 'C-j' select-pane -D
-      bind-key -T copy-mode-vi 'C-k' select-pane -U
-      bind-key -T copy-mode-vi 'C-l' select-pane -R
-      bind-key -T copy-mode-vi 'C-\' select-pane -l
-    '';
   };
 
   home.sessionVariables = {
@@ -171,70 +152,6 @@
         set tabsize 2
         set tabstospaces
       '';
-    };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      extraConfig = '''';
-      extraLuaConfig = ''
-        vim.cmd("colorscheme nightfly")
-        local metals_config = require("metals").bare_config()
-        metals_config.settings = {
-          showImplicitArguments = true,
-          excludedPackages = { "akka.actor.typed.javadsl" }
-        }
-        vim.api.nvim_create_autocmd("FileType", {
-          pattern = { "scala", "sbt", "java" },
-          callback = function()
-            require("metals").initialize_or_attach(metals_config)
-          end
-        })
-      '';
-      plugins = with pkgs.vimPlugins; [
-        vim-fugitive
-        vim-gitgutter
-        nvim-lspconfig
-        nvim-metals
-        plenary-nvim
-        ale
-        {
-          plugin = deoplete-nvim;
-          config = ''
-            let g:deoplete#enable_at_startup = 1
-            set completeopt=menu,noinsert
-          '';
-        }
-        {
-          plugin = deoplete-lsp;
-          config = ''
-            " g:deoplete#lsp#handler_enabled = 1
-          '';
-        }
-        {
-          plugin = nerdtree;
-          config = ''
-            " Exit Vim if NERDTree is the only window remaining in the only tab.
-            autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
-            " Close the tab if NERDTree is the only window remaining in it.
-            autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
-          '';
-        }
-        {
-          plugin = telescope-nvim;
-          config = ''
-            nnoremap ff <cmd>Telescope find_files<cr>
-            nnoremap fg <cmd>Telescope live_grep<cr>
-            nnoremap f:b <cmd>Telescope buffers<cr>
-            nnoremap fh <cmd>Telescope help_tags<cr>
-          '';
-        }
-        {
-          plugin = vim-tmux-navigator;
-        }
-        {
-          plugin = nightfly;
-        }
-      ];
     };
   };
 
