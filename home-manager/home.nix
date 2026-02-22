@@ -76,6 +76,7 @@
     iperf
     iperf2
     python311Packages.pygments
+    protonvpn-gui
   ];
 
   home.file = {
